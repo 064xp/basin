@@ -53,6 +53,20 @@ def addTransaction():
 
     return jsonify({'status': 'success'}), 200
 
+@app.route('/transactions')
+@jwt_required()
+def getTransactions():
+    db = DataBase(settings.dbFile)
+    orderByValues = ('newest', 'oldest')
+    ammount = request.args.get('ammount', default=10, type=int)
+    orderBy = request.args.get('orderBy', default='newest', type=str)
+    orderBy = orderBy if orderBy in orderByValues else 'newest'
+    offset = request.args.get('offset', default=0, type=int)
+
+    transactions = db.getTransactions(ammount, orderBy, offset, str(current_identity))
+    return jsonify({'transactions': transactions}), 200
+
+
 if __name__ == "__main__":
     app.secret_key = os.urandom(15)
     app.config['JWT_SECRET_KEY'] = os.urandom(15)
