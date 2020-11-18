@@ -18,10 +18,18 @@ class DataBase:
             username text  NOT NULL,
             password text NOT NULL,
             id text NOT NULL PRIMARY KEY
-        )
+        );
+
+        CREATE TABLE IF NOT EXISTS Sales(
+            name text NOT NULL,
+            client text,
+            paid boolean,
+            ammount real
+        );
         '''
 
         self.cursor.executescript(command)
+        self.conn.commit()
 
     def insertUser(self, username, password):
         command = '''
