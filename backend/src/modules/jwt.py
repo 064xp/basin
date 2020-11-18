@@ -14,5 +14,5 @@ class JWTFunctions:
     def identity(payload):
         userId = payload['identity']
         db = DataBase(settings.dbFile)
-        user = db.getUser(username)
+        user = db.getUser(id=userId)
         return user.id

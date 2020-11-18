@@ -32,6 +32,27 @@ def signUp():
         return jsonify({'status':'error','error': 'Username already in use'}), 409
     return jsonify({'status': 'success'}), 200
 
+@app.route('/transactions', methods=['POST'])
+@jwt_required()
+def addTransaction():
+    db = DataBase(settings.dbFile)
+    try:
+        json = request.get_json()
+        name = json['name']
+        client = json['client']
+        paid = json['paid']
+        ammount = json['ammount']
+    except:
+        return jsonify({'satus': 'error', 'error': 'Invalid JSON'}), 400
+
+    try:
+        db.insertTransaction(name, client, paid, ammount, str(current_identity))
+    except Error as e:
+        print(e)
+        return jsonify({'status': 'error', 'error': 'Internal datbase error'}), 500
+
+    return jsonify({'status': 'success'}), 200
+
 if __name__ == "__main__":
     app.secret_key = os.urandom(15)
     app.config['JWT_SECRET_KEY'] = os.urandom(15)

@@ -20,11 +20,15 @@ class DataBase:
             id text NOT NULL PRIMARY KEY
         );
 
-        CREATE TABLE IF NOT EXISTS Sales(
+        CREATE TABLE IF NOT EXISTS Transactions(
             name text NOT NULL,
             client text,
             paid boolean,
-            ammount real
+            ammount real,
+            id text NOT NULL PRIMARY KEY,
+            user text NOT NULL,
+            FOREIGN KEY (user)
+                REFERENCES Users (id)
         );
         '''
 
@@ -43,9 +47,24 @@ class DataBase:
         self.cursor.execute(command, (username, generate_password_hash(password), id))
         self.conn.commit()
 
-    def getUser(self, username):
-        self.cursor.execute('SELECT username, password, id FROM Users WHERE username = ?', (username,))
+    def getUser(self, username=None, id=None):
+        if id is not None:
+            self.cursor.execute('SELECT username, password, id FROM Users WHERE id = ?', (id,))
+        elif username is not None:
+            self.cursor.execute('SELECT username, password, id FROM Users WHERE username = ?', (username,))
+        else:
+            return False
         user = self.cursor.fetchone()
         if user is None:
             return False
         return User(user[0], user[1], user[2])
+
+    def insertTransaction(self, name, client, paid, ammount, user):
+        command = '''
+        INSERT INTO Transactions
+        (name, client, paid, ammount, id, user)
+        VALUES (?, ?, ?, ?, ?, ?)
+        '''
+
+        self.cursor.execute(command, (name, client, paid, ammount, str(uuid.uuid4()), user))
+        self.conn.commit()
