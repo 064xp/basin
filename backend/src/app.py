@@ -1,10 +1,11 @@
 from flask import Flask, request, jsonify
 import os
-from datetime import timedelta
+from datetime import timedelta, datetime
 from sqlite3 import Error
 from flask_jwt import JWT, jwt_required, current_identity
 from modules.jwt import JWTFunctions
 from modules.dataBase import DataBase
+from modules.helperFunctions import HelperFunctions as hf
 import settings
 
 app = Flask(__name__)
@@ -62,6 +63,7 @@ def getTransactions():
     orderBy = request.args.get('orderBy', default='newest', type=str)
     orderBy = orderBy if orderBy in orderByValues else 'newest'
     offset = request.args.get('offset', default=0, type=int)
+    date = request.args.get('date', default=datetime.now(), type=hf.JSONtoDate)
 
     transactions = db.getTransactions(ammount, orderBy, offset, str(current_identity))
     return jsonify({'transactions': transactions}), 200
