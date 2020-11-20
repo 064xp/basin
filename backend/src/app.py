@@ -70,6 +70,6 @@ def getTransactions():
 if __name__ == "__main__":
     app.secret_key = os.urandom(15)
     app.config['JWT_SECRET_KEY'] = os.urandom(15)
-    app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=11000)
+    app.config['JWT_EXPIRATION_DELTA'] = timedelta(hours=4)
     db = DataBase(settings.dbFile).createTables()
     app.run()
