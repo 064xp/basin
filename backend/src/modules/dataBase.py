@@ -33,6 +33,7 @@ class DataBase:
             name text NOT NULL,
             client text,
             paid boolean,
+            pending boolean,
             ammount real,
             date datetime,
             id text NOT NULL PRIMARY KEY,
