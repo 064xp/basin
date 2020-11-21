@@ -3,7 +3,7 @@ const initialState = {
   isLoggedIn: false,
 };
 
-export default reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOG_IN":
       return {
@@ -17,5 +17,9 @@ export default reducer = (state = initialState, action) => {
         isLoggedIn: false,
         username: "",
       };
+    default:
+      return state;
   }
 };
+
+export default reducer;

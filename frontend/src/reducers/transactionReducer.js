@@ -3,7 +3,7 @@ const initialState = {
   completed: [],
 };
 
-export default reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_TRANSACTIONS":
       return {
@@ -14,11 +14,15 @@ export default reducer = (state = initialState, action) => {
     case "COMPLETED_TRANSACTION":
       return {
         ...state,
-        pending: state.pending.filter((t) => t.id != action.payload),
+        pending: state.pending.filter((t) => t.id !== action.payload),
         completed: [
-          ...completed,
-          state.pending.find((t) => t.id == action.payload),
+          ...state.completed,
+          state.pending.find((t) => t.id === action.payload),
         ],
       };
+    default:
+      return state;
   }
 };
+
+export default reducer;
