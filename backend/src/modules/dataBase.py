@@ -71,20 +71,20 @@ class DataBase:
             return False
         return User(user['username'], user['password'], user['id'])
 
-    def insertTransaction(self, name, client, paid, ammount, user):
+    def insertTransaction(self, name, client, paid, ammount, cost, pending, user):
         command = '''
         INSERT INTO Transactions
-        (name, client, paid, ammount, id, date, user)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        (name, client, paid, ammount, date, pending, cost, id, user)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         '''
-        self.cursor.execute(command, (name, client, paid, ammount, str(uuid.uuid4()), datetime.now(), user))
+        self.cursor.execute(command, (name, client, paid, ammount, datetime.now(), pending, cost, str(uuid.uuid4()), user))
         self.conn.commit()
 
     def getTransactions(self, ammount, orderBy, offset, user):
         order = 'date '
         order += 'DESC' if orderBy == 'newest' else 'ASC'
         command =  f'''
-        SELECT name, client, paid, ammount, id, date
+        SELECT *
         FROM Transactions
         WHERE user = ?
         ORDER BY {order}

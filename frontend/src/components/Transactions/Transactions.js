@@ -1,45 +1,11 @@
 import React from "react";
 import Transaction from "./Transaction/Transaction";
 import "./transactions.css";
+import { useSelector } from "react-redux";
 
 const Transactions = (props) => {
-  //mock data
-  const pending = [
-    {
-      name: "Sale 1",
-      client: "John",
-      ammount: 3,
-      cost: 300,
-      paid: false,
-      pending: true,
-    },
-    {
-      name: "Sale 2",
-      client: "Peter",
-      ammount: 2,
-      cost: 200,
-      paid: false,
-      pending: false,
-    },
-  ];
-  const completed = [
-    {
-      name: "Sale 3",
-      client: "Mary",
-      ammount: 1,
-      cost: 200,
-      paid: true,
-      pending: false,
-    },
-    {
-      name: "Sale 4",
-      client: "Peter",
-      ammount: 2,
-      cost: 240,
-      paid: true,
-      pending: false,
-    },
-  ];
+  const completed = useSelector((state) => state.transactions.completed);
+  const pending = useSelector((state) => state.transactions.pending);
 
   const chooseBackground = (transaction) => {
     const colors = {

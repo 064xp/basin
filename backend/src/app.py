@@ -42,12 +42,14 @@ def addTransaction():
         name = json['name']
         client = json['client']
         paid = json['paid']
+        pending = json['pending']
         ammount = json['ammount']
+        cost = json['cost']
     except:
-        return jsonify({'satus': 'error', 'error': 'Invalid JSON'}), 400
+        return jsonify({'status': 'error', 'error': 'Invalid JSON'}), 400
 
     try:
-        db.insertTransaction(name, client, paid, ammount, str(current_identity))
+        db.insertTransaction(name, client, paid, ammount, cost, pending, str(current_identity))
     except Error as e:
         print(e)
         return jsonify({'status': 'error', 'error': 'Internal datbase error'}), 500
