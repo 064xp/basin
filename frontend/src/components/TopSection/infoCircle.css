@@ -3,11 +3,10 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 50vw;
-  height: 50vw;
   border-radius: 999px;
   background-color: #1e88e5;
   color: white;
+  padding: 1.4em;
 }
 
 .info-circle_time-frame {
@@ -20,6 +19,7 @@
   font-size: 3em;
   font-weight: normal;
   margin: 0;
+  text-align: ;
 }
 
 .info-circle_pending {

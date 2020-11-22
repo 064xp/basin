@@ -1,15 +1,22 @@
 import "./App.css";
-import Header from "./components/Header/Header";
-import TopSection from "./components/TopSection/TopSection";
-import Transactions from "./components/Transactions/Transactions";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <TopSection />
-      <Transactions />
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/">
+            <Dashboard />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
