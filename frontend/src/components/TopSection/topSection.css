@@ -1,0 +1,12 @@
+#top-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-section_busines-name {
+  font-weight: normal;
+  font-weight: 1.6em;
+  margin: 1em 0 0.5em 0;
+}

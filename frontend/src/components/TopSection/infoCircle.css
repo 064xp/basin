@@ -1,0 +1,29 @@
+.info-circle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 999px;
+  background-color: #1e88e5;
+  color: white;
+}
+
+.info-circle_time-frame {
+  font-weight: lighter;
+  font-size: 1.4em;
+  margin: 0.5em 0 0 0;
+}
+
+.info-circle_ammount {
+  font-size: 3em;
+  font-weight: normal;
+  margin: 0;
+}
+
+.info-circle_pending {
+  font-weight: lighter;
+  font-size: 1.4em;
+  margin: 0 0 0.5em 0;
+}
