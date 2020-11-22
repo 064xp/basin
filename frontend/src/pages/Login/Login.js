@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./login.css";
 
 const Login = (props) => {
   const [state, setState] = useState({ username: "", password: "" });
+  const loggedIn = useSelector((state) => state.user.loggedIn);
+  const history = useHistory();
+  useEffect(() => {
+    if (loggedIn) {
+      history.push("/");
+    }
+    //eslint-disable-next-line
+  }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
   };
