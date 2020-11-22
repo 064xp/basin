@@ -19,7 +19,7 @@ const Transactions = (props) => {
       client: "Peter",
       ammount: 2,
       cost: 200,
-      paid: true,
+      paid: false,
       pending: false,
     },
   ];
@@ -42,18 +42,38 @@ const Transactions = (props) => {
     },
   ];
 
+  const chooseBackground = (transaction) => {
+    const colors = {
+      pending: "#283593",
+      unpaid: "#F57F17",
+      completed: "#4CAF50",
+    };
+
+    if (transaction.pending) {
+      return colors.pending;
+    } else if (!transaction.paid) {
+      return colors.unpaid;
+    } else {
+      return colors.completed;
+    }
+  };
+
   return (
     <section id="transactions">
       <h2 className="transactions-subtitle">Pending</h2>
       <div className="transactions-container">
         {pending.map((t) => {
-          return <Transaction transaction={t} />;
+          return (
+            <Transaction transaction={t} background={chooseBackground(t)} />
+          );
         })}
       </div>
       <h2 className="transactions-subtitle">Completed</h2>
       <div className="transactions-container">
         {completed.map((t) => {
-          return <Transaction transaction={t} />;
+          return (
+            <Transaction transaction={t} background={chooseBackground(t)} />
+          );
         })}
       </div>
     </section>

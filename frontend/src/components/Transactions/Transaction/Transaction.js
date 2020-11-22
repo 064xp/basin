@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./transaction.css";
 
-const Transaction = ({ transaction }) => {
+const Transaction = ({ transaction, background }) => {
   return (
-    <div className="transaction">
+    <div className="transaction" style={{ background: background }}>
       <div>
         <h3 className="transaction_name margin0">
           {transaction.name} ({transaction.ammount})
@@ -17,6 +17,11 @@ const Transaction = ({ transaction }) => {
       </div>
     </div>
   );
+};
+
+Transaction.propTypes = {
+  transaction: PropTypes.object.isRequired,
+  background: PropTypes.string.isRequired,
 };
 
 export default Transaction;
