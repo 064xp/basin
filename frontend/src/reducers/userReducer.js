@@ -1,6 +1,8 @@
 const initialState = {
   username: "",
+  accessToken: "",
   loggedIn: false,
+  loginError: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -9,13 +11,20 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loggedIn: true,
-        username: action.payload,
+        username: action.payload.username,
+        accessToken: action.payload.accessToken,
       };
     case "LOG_OUT":
       return {
         ...state,
         loggedIn: false,
         username: "",
+        accesToken: "",
+      };
+    case "LOGIN_ERROR":
+      return {
+        ...state,
+        loginError: action.payload,
       };
     default:
       return state;
