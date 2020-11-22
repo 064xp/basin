@@ -1,0 +1,17 @@
+#transactions {
+  width: 80vw;
+  max-width: 500px;
+  margin: auto;
+}
+
+.transactions-subtitle {
+  margin: 1em 0 0.3em 0;
+  font-weight: normal;
+}
+
+.transactions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}

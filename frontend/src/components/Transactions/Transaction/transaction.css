@@ -1,0 +1,36 @@
+.transaction {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #673ab7;
+  color: white;
+  margin: 0 0 1em 0;
+  padding: 0 1em;
+  box-sizing: border-box;
+  height: 4.3rem;
+  border-radius: 9px;
+}
+
+.transaction_right {
+  text-align: right;
+}
+
+.transaction_name {
+  margin: 0em 0 0 0;
+  font-size: 1.5em;
+}
+
+.transaction_client {
+  font-size: 1.2em;
+}
+
+.transaction_cost {
+  margin: 0.2em 0 0 0;
+  font-size: 1.8em;
+}
+
+.transaction_paid {
+  margin: 0 0 0.3em 0;
+  font-weight: lighter;
+}
