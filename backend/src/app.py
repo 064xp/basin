@@ -69,9 +69,13 @@ def getTransactions():
     return jsonify({'transactions': transactions}), 200
 
 
+@app.errorhandler(404)
+def notFound(e):
+    return app.send_static_file('../public/index.html')
+
 if __name__ == "__main__":
     app.secret_key = os.urandom(15)
     app.config['JWT_SECRET_KEY'] = os.urandom(15)
     app.config['JWT_EXPIRATION_DELTA'] = timedelta(hours=4)
     db = DataBase(settings.dbFile).createTables()
-    app.run()
+    app.run(port='3001', debug=True)

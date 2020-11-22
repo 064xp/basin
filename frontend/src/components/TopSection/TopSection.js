@@ -1,6 +1,5 @@
 import React from "react";
 import InfoCircle from "./InfoCircle";
-import PropTypes from "prop-types";
 import "./topSection.css";
 
 const TopSection = (props) => {

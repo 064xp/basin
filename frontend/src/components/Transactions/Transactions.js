@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Transaction from "./Transaction/Transaction";
 import "./transactions.css";
 
@@ -62,17 +61,25 @@ const Transactions = (props) => {
     <section id="transactions">
       <h2 className="transactions-subtitle">Pending</h2>
       <div className="transactions-container">
-        {pending.map((t) => {
+        {pending.map((t, i) => {
           return (
-            <Transaction transaction={t} background={chooseBackground(t)} />
+            <Transaction
+              key={i}
+              transaction={t}
+              background={chooseBackground(t)}
+            />
           );
         })}
       </div>
       <h2 className="transactions-subtitle">Completed</h2>
       <div className="transactions-container">
-        {completed.map((t) => {
+        {completed.map((t, i) => {
           return (
-            <Transaction transaction={t} background={chooseBackground(t)} />
+            <Transaction
+              key={i}
+              transaction={t}
+              background={chooseBackground(t)}
+            />
           );
         })}
       </div>

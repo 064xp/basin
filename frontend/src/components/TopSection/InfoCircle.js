@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./infoCircle.css";
-import ReactFitText from "react-fittext";
 
 const InfoCircle = (props) => {
   return (
