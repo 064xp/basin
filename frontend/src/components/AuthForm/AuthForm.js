@@ -53,7 +53,9 @@ const AuthForm = ({ submitHandler, isSignup = false, authError }) => {
             />
           </React.Fragment>
         ) : null}
-        <button type="submit">{isSignup ? "Sign Up" : "Login"}</button>
+        <button className={isSignup ? "btn-signup" : "btn-login"} type="submit">
+          {isSignup ? "Sign Up" : "Login"}
+        </button>
       </form>
     </div>
   );

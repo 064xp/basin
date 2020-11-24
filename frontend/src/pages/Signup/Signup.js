@@ -27,7 +27,7 @@ const Signup = (props) => {
   };
 
   return (
-    <div id="login-page">
+    <div id="signup-page">
       <AuthForm
         authError={signupError}
         submitHandler={submitHandler}

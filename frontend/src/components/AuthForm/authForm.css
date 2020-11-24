@@ -19,7 +19,7 @@
 }
 
 .auth-container form input {
-  margin: 0 0 2em 0;
+  margin: 0 0 1.4em 0;
   background: white;
   border: 1px solid #7c7c7c;
   border-radius: 5px;
@@ -41,9 +41,25 @@
   transition: all 150ms ease-in;
 }
 
-.auth-container form button:hover {
-  background: #4527a0;
-  color: white;
+.btn-signup {
+  color: var(--signup-color) !important;
+  border: 2px solid var(--signup-color) !important;
+}
+
+.btn-signup:hover {
+  background: var(--signup-color);
+  color: white !important;
+  border: 2px solid white;
+}
+
+.btn-login {
+  color: var(--login-color) !important;
+  border: 2px solid var(--login-color) !important;
+}
+
+.btn-login:hover {
+  background: var(--login-color);
+  color: white !important;
   border: 2px solid white;
 }
 

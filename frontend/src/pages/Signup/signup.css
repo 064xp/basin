@@ -1,5 +1,5 @@
-#login-page {
-  background: #4527a0;
+#signup-page {
+  background: var(--signup-color);
   height: 100vh;
   display: flex;
   flex-direction: column;
