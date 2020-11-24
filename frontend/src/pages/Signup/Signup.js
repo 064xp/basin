@@ -21,9 +21,11 @@ const Signup = (props) => {
   const submitHandler = (username, password, confirmPassword) => {
     if (password !== confirmPassword) {
       dispatch(authError("Passwords do not match"));
-      return;
+    } else if (username === "" || password === "") {
+      dispatch(authError("Username or password cannot be empty!"));
+    } else {
+      dispatch(signup(username, password));
     }
-    dispatch(signup(username, password));
   };
 
   return (

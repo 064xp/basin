@@ -20,7 +20,10 @@ export const signup = (username, password) => (dispatch) =>
       dispatch(login(username, password));
     })
     .catch((error) => {
-      dispatch({ type: "AUTH_ERROR", payload: "Username already in use" });
+      dispatch({
+        type: "AUTH_ERROR",
+        payload: error.response.data.error,
+      });
     });
 
 export const authError = (error) => {

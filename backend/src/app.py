@@ -25,6 +25,9 @@ def signUp():
     except:
         return jsonify({'satus': 'error', 'error': 'Invalid JSON'}), 400
 
+    if not username or not password:
+        return jsonify({'satus': 'error', 'error': 'Username or password cannot be empty'}), 400
+
     try:
         db.insertUser(username, password)
     except Error as e:
