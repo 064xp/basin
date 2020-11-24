@@ -2,7 +2,7 @@ const initialState = {
   username: "",
   accessToken: "",
   loggedIn: false,
-  loginError: false,
+  authError: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,10 +21,10 @@ const reducer = (state = initialState, action) => {
         username: "",
         accesToken: "",
       };
-    case "LOGIN_ERROR":
+    case "AUTH_ERROR":
       return {
         ...state,
-        loginError: action.payload,
+        authError: action.payload,
       };
     default:
       return state;
