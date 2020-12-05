@@ -48,17 +48,18 @@ def addTransaction():
         pending = json['pending']
         ammount = json['ammount']
         cost = json['cost']
+        individualPrice = json['individualPrice']
         print(json)
     except:
         return jsonify({'status': 'error', 'error': request}), 400
 
     try:
-        db.insertTransaction(name, client, paid, ammount, cost, pending, str(current_identity))
+        newId = db.insertTransaction(name, client, paid, ammount, cost, pending, individualPrice, str(current_identity))
     except Error as e:
         print(e)
         return jsonify({'status': 'error', 'error': 'Internal datbase error'}), 500
 
-    return jsonify({'status': 'success'}), 200
+    return jsonify({'id': newId}), 200
 
 @app.route('/transactions')
 @jwt_required()

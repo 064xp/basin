@@ -36,6 +36,7 @@ class DataBase:
             pending boolean,
             ammount int,
             cost real,
+            individualPrice real,
             date datetime,
             id text NOT NULL PRIMARY KEY,
             user text NOT NULL,
@@ -71,14 +72,17 @@ class DataBase:
             return False
         return User(user['username'], user['password'], user['id'])
 
-    def insertTransaction(self, name, client, paid, ammount, cost, pending, user):
+    def insertTransaction(self, name, client, paid, ammount, cost, pending,individualPrice, user):
         command = '''
         INSERT INTO Transactions
-        (name, client, paid, ammount, date, pending, cost, id, user)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (name, client, paid, ammount, date, pending, cost, individualPrice, id, user)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         '''
-        self.cursor.execute(command, (name, client, paid, ammount, datetime.now(), pending, cost, str(uuid.uuid4()), user))
+        id = str(uuid.uuid4())
+        self.cursor.execute(command, (name, client, paid, ammount, datetime.now(), pending, cost, individualPrice, id, user))
         self.conn.commit()
+        return id
+
 
     def getTransactions(self, ammount, orderBy, offset, user):
         order = 'date '

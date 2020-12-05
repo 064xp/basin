@@ -26,7 +26,7 @@ const Transaction = ({ transaction, background = "#283593" }) => {
 
 Transaction.propTypes = {
   transaction: PropTypes.object.isRequired,
-  background: PropTypes.string.isRequired,
+  background: PropTypes.string,
 };
 
 export default Transaction;

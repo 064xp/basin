@@ -14,6 +14,7 @@ export const addTransaction = (transaction) => (dispatch) => {
   axios
     .post("/transactions", transaction)
     .then((res) => {
+      transaction = { ...transaction, id: res.data.id };
       dispatch({ type: "ADD_TRANSACTION", payload: transaction });
     })
     .catch((e) => {

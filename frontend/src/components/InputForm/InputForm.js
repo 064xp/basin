@@ -39,10 +39,8 @@ const InputForm = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let newTransaction = state;
-    newTransaction.individualPrice = null;
 
-    dispatch(addTransaction(newTransaction));
+    dispatch(addTransaction(state));
     setState({
       name: "",
       ammount: 1,
