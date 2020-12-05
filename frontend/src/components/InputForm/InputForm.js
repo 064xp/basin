@@ -1,6 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./inputForm.css";
+
+import Transaction from "../Transactions/Transaction/Transaction";
 import dollarIcon from "../../img/dollar.svg";
 import crossIcon from "../../img/cross-sign.svg";
 
@@ -9,8 +11,10 @@ const InputForm = (props) => {
   const [state, setState] = useState({
     name: "",
     ammount: 1,
-    price: "0",
+    individualPrice: "0",
+    cost: "0",
     client: "",
+    paid: true,
   });
 
   const onChange = (e) => {
@@ -21,6 +25,13 @@ const InputForm = (props) => {
     });
   };
 
+  useEffect(() => {
+    setState({
+      ...state,
+      cost: (Number(state.individualPrice) * Number(state.ammount)).toString(),
+    });
+  }, [state.ammount, state.individualPrice]);
+
   const onSubmit = (e) => {
     e.preventDefault();
   };
@@ -28,11 +39,13 @@ const InputForm = (props) => {
   const toggleForm = () => {
     formEl.current.classList.toggle("transaction-inputForm_show");
   };
+
   return (
     <React.Fragment>
       <button onClick={toggleForm}>show</button>
       <form action="#" ref={formEl} className={"transaction-inputForm"}>
         <h1>Add a new Transaction</h1>
+        <Transaction transaction={state} autoHeight={true} />
         <button
           className="transaction-inputForm_close"
           type="button"
@@ -52,7 +65,7 @@ const InputForm = (props) => {
           <input
             type="text"
             id="input-form_tName"
-            name="name"
+            name="client"
             onChange={onChange}
             value={state.client}
           />
@@ -65,17 +78,18 @@ const InputForm = (props) => {
             value={state.ammount}
             inputmode="numeric"
           />
-          <label htmlFor="input-form_price">Price</label>
+          <label htmlFor="input-form_price">Individual Price</label>
           <input
             type="number"
             id="input-form_price"
-            name="price"
+            name="individualPrice"
             onChange={onChange}
-            value={state.price}
+            value={state.individualPrice.toString()}
             inputmode="numeric"
             style={{
               backgroundImage: `url(${dollarIcon})`,
             }}
+            onFocus={(e) => e.target.select()}
             className="transaction-inputForm_icon-input"
           />
         </div>
