@@ -5,6 +5,7 @@ import "./inputForm.css";
 import Transaction from "../Transactions/Transaction/Transaction";
 import dollarIcon from "../../img/dollar.svg";
 import crossIcon from "../../img/cross-sign.svg";
+import plus from "../../img/plus.svg";
 
 const InputForm = (props) => {
   const formEl = useRef(null);
@@ -42,7 +43,11 @@ const InputForm = (props) => {
 
   return (
     <React.Fragment>
-      <button onClick={toggleForm}>show</button>
+      <button
+        className="transaction-inputForm_btn-open"
+        onClick={toggleForm}
+        style={{ backgroundImage: `url(${plus})` }}
+      ></button>
       <form action="#" ref={formEl} className={"transaction-inputForm"}>
         <h1>Add a new Transaction</h1>
         <Transaction transaction={state} autoHeight={true} />

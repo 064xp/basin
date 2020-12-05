@@ -1,3 +1,24 @@
+.transaction-inputForm_btn-open {
+  position: fixed;
+  right: 2%;
+  bottom: 2%;
+  height: 4.2rem;
+  width: 4.2rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #1e88e5;
+  background-size: 60%;
+  border: none;
+  border-radius: 99px;
+  transition: box-shadow 100ms ease-in;
+  transition: transform 100ms ease-in;
+}
+
+.transaction-inputForm_btn-open:hover {
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.55);
+  transform: scale(1.05);
+}
+
 .transaction-inputForm {
   background: #0e173c;
   border-radius: 7px;
