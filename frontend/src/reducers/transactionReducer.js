@@ -20,6 +20,11 @@ const reducer = (state = initialState, action) => {
           state.pending.find((t) => t.id === action.payload),
         ],
       };
+    case "ADD_TRANSACTION":
+      return {
+        ...state,
+        pending: [action.payload, ...state.pending],
+      };
     default:
       return state;
   }

@@ -9,3 +9,15 @@ export const getTransactions = (accessToken) => (dispatch) =>
     .catch((error) => {
       dispatch({ type: "LOGIN_ERROR", payload: true });
     });
+
+export const addTransaction = (transaction) => (dispatch) => {
+  axios
+    .post("/transactions", transaction)
+    .then((res) => {
+      dispatch({ type: "ADD_TRANSACTION", payload: transaction });
+    })
+    .catch((e) => {
+      //TODO implement notifications
+      // alert("Error while adding transaction");
+    });
+};

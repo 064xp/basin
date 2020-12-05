@@ -48,8 +48,9 @@ def addTransaction():
         pending = json['pending']
         ammount = json['ammount']
         cost = json['cost']
+        print(json)
     except:
-        return jsonify({'status': 'error', 'error': 'Invalid JSON'}), 400
+        return jsonify({'status': 'error', 'error': request}), 400
 
     try:
         db.insertTransaction(name, client, paid, ammount, cost, pending, str(current_identity))

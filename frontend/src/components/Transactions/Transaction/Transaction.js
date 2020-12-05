@@ -2,16 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./transaction.css";
 
-const Transaction = ({
-  transaction,
-  background = "#283593",
-  autoHeight = false,
-}) => {
+const Transaction = ({ transaction, background = "#283593" }) => {
   return (
-    <div
-      className="transaction"
-      style={{ background: background, height: autoHeight ? "auto" : null }}
-    >
+    <div className="transaction" style={{ background: background }}>
       <div>
         <h3 className="transaction_name margin0">
           {transaction.name} ({transaction.ammount})
