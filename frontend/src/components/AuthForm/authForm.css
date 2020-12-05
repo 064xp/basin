@@ -103,4 +103,7 @@
   .auth-container {
     width: 80vw;
   }
+  .authForm-link {
+    width: 50%;
+  }
 }

@@ -68,10 +68,9 @@ const AuthForm = ({
         {link ? (
           <Link
             to={link}
-            className={
-              (isSignup ? "authForm-link-login" : "authForm-link-signup") +
-              " authForm-link"
-            }
+            className={`${
+              isSignup ? "authForm-link-login" : "authForm-link-signup"
+            } authForm-link`}
           >
             {linkName}
           </Link>

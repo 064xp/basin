@@ -5,6 +5,7 @@ import Header from "../../components/Header/Header";
 import TopSection from "../../components/TopSection/TopSection";
 import Transactions from "../../components/Transactions/Transactions";
 import { getTransactions } from "../../actions/transactionsActions";
+import InputForm from "../../components/InputForm/InputForm";
 
 const Dashboard = (props) => {
   const loggedIn = useSelector((state) => state.user.loggedIn);
@@ -24,6 +25,7 @@ const Dashboard = (props) => {
       <Header />
       <TopSection />
       <Transactions />
+      <InputForm />
     </div>
   );
 };
