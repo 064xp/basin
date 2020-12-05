@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../actions/userActions";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import "./login.css";
 
 const Login = (props) => {
-  const [state, setState] = useState({ username: "", password: "" });
   const loggedIn = useSelector((state) => state.user.loggedIn);
   const loginError = useSelector((state) => state.user.authError);
   const history = useHistory();
@@ -25,7 +24,12 @@ const Login = (props) => {
 
   return (
     <div id="login-page">
-      <AuthForm authError={loginError} submitHandler={submitHandler} />
+      <AuthForm
+        authError={loginError}
+        submitHandler={submitHandler}
+        link={"/signup"}
+        linkName={"Sign Up"}
+      />
     </div>
   );
 };

@@ -34,6 +34,8 @@ const Signup = (props) => {
         authError={signupError}
         submitHandler={submitHandler}
         isSignup={true}
+        link={"/login"}
+        linkName={"Log In"}
       />
     </div>
   );

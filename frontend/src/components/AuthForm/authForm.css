@@ -68,6 +68,37 @@
   margin: 0 0 0.4em 0;
 }
 
+.authForm-link {
+  text-decoration: none;
+  font-weight: lighter;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: auto;
+  margin-top: 1rem;
+  transition: transform 100ms ease-in;
+  border-radius: 99px;
+  color: white;
+  width: 20%;
+  padding: 0.1em;
+}
+
+.authForm-link:hover {
+  transform: scale(1.01);
+  font-weight: bold;
+}
+
+.authForm-link-signup {
+  /* background: var(--signup-color) !important; */
+  color: var(--signup-color) !important;
+  border: 1px solid var(--signup-color);
+}
+
+.authForm-link-login {
+  /* background: var(--login-color) !important; */
+  color: var(--login-color) !important;
+  border: 1px solid var(--login-color);
+}
+
 @media only screen and (max-width: 800px) {
   .auth-container {
     width: 80vw;

@@ -1,8 +1,15 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./authForm.css";
 
-const AuthForm = ({ submitHandler, isSignup = false, authError }) => {
+const AuthForm = ({
+  submitHandler,
+  isSignup = false,
+  authError,
+  linkName,
+  link,
+}) => {
   const [state, setState] = useState({
     username: "",
     password: "",
@@ -53,9 +60,22 @@ const AuthForm = ({ submitHandler, isSignup = false, authError }) => {
             />
           </React.Fragment>
         ) : null}
+
         <button className={isSignup ? "btn-signup" : "btn-login"} type="submit">
           {isSignup ? "Sign Up" : "Login"}
         </button>
+
+        {link ? (
+          <Link
+            to={link}
+            className={
+              (isSignup ? "authForm-link-login" : "authForm-link-signup") +
+              " authForm-link"
+            }
+          >
+            {linkName}
+          </Link>
+        ) : null}
       </form>
     </div>
   );
@@ -65,6 +85,8 @@ AuthForm.propTypes = {
   submitHandler: PropTypes.func.isRequired,
   isSignup: PropTypes.bool,
   authError: PropTypes.string,
+  link: PropTypes.string,
+  linkName: PropTypes.string,
 };
 
 export default AuthForm;
