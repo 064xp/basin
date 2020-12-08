@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./transaction.css";
+import OverlayOptions from "./OverlayOptions";
 
 const Transaction = ({ transaction, background = "#283593" }) => {
+  const [state, setState] = useState({
+    showOptions: false,
+  });
+  const toggleOptions = () => {
+    setState({ ...state, showOptions: !state.showOptions });
+  };
   return (
-    <div className="transaction" style={{ background: background }}>
+    <div
+      className="transaction"
+      style={{ background: background }}
+      onClick={() => toggleOptions()}
+    >
+      <OverlayOptions hide={toggleOptions} showOptions={state.showOptions} />
       <div>
         <h3 className="transaction_name margin0">
           {transaction.name} ({transaction.ammount})

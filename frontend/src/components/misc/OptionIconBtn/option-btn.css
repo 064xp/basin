@@ -1,0 +1,27 @@
+.option-button_cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.option-button_btn {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0;
+  background-size: 65%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: none;
+  border-radius: 99px;
+}
+
+.option-button_btn:hover {
+  background-color: #1e88e5;
+}
+
+.option-button_text {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
