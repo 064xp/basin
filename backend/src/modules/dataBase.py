@@ -3,7 +3,7 @@ from sqlite3 import Error
 import uuid
 from werkzeug.security import generate_password_hash
 from modules.definitions.User import User
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 class DataBase:
     def __init__(self, dbFile):
@@ -83,7 +83,6 @@ class DataBase:
         self.conn.commit()
         return id
 
-
     def getTransactions(self, ammount, orderBy, offset, user):
         order = 'date '
         order += 'DESC' if orderBy == 'newest' else 'ASC'
@@ -97,3 +96,33 @@ class DataBase:
         self.cursor.execute(command, (user, ammount, offset))
         transactions = self.cursor.fetchall()
         return transactions
+
+    def getEarnings(self, timeframe, user):
+        monthCommand = '''
+        select sum(cost) as earnings from transactions
+        where srtftime('%m',date) = srtftime('%m',date('now'))
+        and user = ?
+        '''
+        dayCommand = '''
+        select sum(cost) as earnings from transactions
+        where srtftime('%d',date) = srtftime('%d',date('now'))
+        and user = ?
+        '''
+
+        today = date.today()
+        dayWeek = int(hoy.strftime('%w'))
+        monday = today - timedelta(days=dayWeek-1)
+
+        weekCommand = '''
+        select sum(cost) as earnings from transactions
+        where date >= ? and user = ?
+        '''
+
+        if timeframe == 'day':
+            self.cursor.execute(dayCommand, (user,))
+        elif timeframe == 'week':
+            self.cursor.execute(weekCommand, (lunes, user,))
+        elif timeframe == 'month':
+            self.cursor.execute(monthCommand, (user,))
+
+        return self.cursor.fetchall()
