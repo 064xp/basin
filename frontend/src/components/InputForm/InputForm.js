@@ -5,7 +5,7 @@ import "./inputForm.css";
 import { addTransaction } from "../../actions/transactionsActions";
 
 import Transaction from "../Transactions/Transaction/Transaction";
-import dollarIcon from "../../img/dollar.svg";
+import dollarIcon from "../../img/dollar-dark.svg";
 import crossIcon from "../../img/cross-sign.svg";
 import plus from "../../img/plus.svg";
 
