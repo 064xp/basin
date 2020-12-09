@@ -25,6 +25,38 @@ const reducer = (state = initialState, action) => {
         ...state,
         pending: [action.payload, ...state.pending],
       };
+    case "SET_PENDING_STATUS":
+      return {
+        ...state,
+        pending: state.pending.map((t) =>
+          t.id === action.payload.id
+            ? { ...t, pending: action.payload.pending }
+            : t
+        ),
+        completed: state.completed.map((t) =>
+          t.id === action.payload.id
+            ? { ...t, pending: action.payload.pending }
+            : t
+        ),
+      };
+    case "SET_PAID_STATUS":
+      return {
+        ...state,
+        pending: state.pending.map((t) =>
+          t.id === action.payload.id ? { ...t, paid: action.payload.paid } : t
+        ),
+        completed: state.completed.map((t) =>
+          t.id === action.payload.id ? { ...t, paid: action.payload.paid } : t
+        ),
+      };
+
+    case "REFRESH_TRANSACTIONS":
+      const transactions = [...state.completed, ...state.pending];
+      return {
+        ...state,
+        pending: transactions.filter((t) => t.pending || !t.paid),
+        completed: transactions.filter((t) => !t.pending && t.paid),
+      };
     default:
       return state;
   }
