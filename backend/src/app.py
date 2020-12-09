@@ -15,6 +15,26 @@ jwt = JWT(app, JWTFunctions.authenticate, JWTFunctions.identity)
 def root():
     return 'you made it!'
 
+@app.route('/earnings/<timeframe>')
+@jwt_required()
+def earnings(timeframe):
+    try:
+        db=DataBase(settings.dbFile)
+        total=db.getEarnings(timeframe, str(current_identity))
+        return jsonify(total)
+    except:
+        return 'Unsuccessful', 500
+
+@app.route('/transactions/<id>', methods=['DELETE'])
+@jwt_required()
+def deleter(id):
+    try:
+        db=DataBase(settings.dbFile)
+        db.deleteTransactions(id, str(current_identity))
+        return 'Successful', 200
+    except:
+        return 'Unsuccessful', 500
+
 @app.route('/sign-up', methods=['POST'])
 def signUp():
     db = DataBase(settings.dbFile)

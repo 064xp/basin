@@ -100,29 +100,41 @@ class DataBase:
     def getEarnings(self, timeframe, user):
         monthCommand = '''
         select sum(cost) as earnings from transactions
-        where srtftime('%m',date) = srtftime('%m',date('now'))
-        and user = ?
+        where strftime('%m',date) = strftime('%m',date('now'))
+        and paid = true and user = ?
         '''
         dayCommand = '''
         select sum(cost) as earnings from transactions
-        where srtftime('%d',date) = srtftime('%d',date('now'))
-        and user = ?
+        where strftime('%d',date) = strftime('%d',date('now'))
+        and paid = true and user = ?
         '''
 
         today = date.today()
-        dayWeek = int(hoy.strftime('%w'))
+        dayWeek = int(today.strftime('%w'))
         monday = today - timedelta(days=dayWeek-1)
 
         weekCommand = '''
         select sum(cost) as earnings from transactions
-        where date >= ? and user = ?
+        where date >= ? and paid= true and user = ?
         '''
 
         if timeframe == 'day':
             self.cursor.execute(dayCommand, (user,))
         elif timeframe == 'week':
-            self.cursor.execute(weekCommand, (lunes, user,))
+            self.cursor.execute(weekCommand, (monday, user,))
         elif timeframe == 'month':
             self.cursor.execute(monthCommand, (user,))
 
-        return self.cursor.fetchall()
+        result = self.cursor.fetchall()
+        if not result[0]['earnings']:
+            result = {'earnings': 0}
+        return result
+
+    def deleteTransactions(self, id, userId):
+        deleteCommand = '''
+        delete from transactions
+        where id = ? and user = ?
+
+        '''
+        self.cursor.execute(deleteCommand, (id, userId))
+        self.conn.commit()
