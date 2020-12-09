@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "./overlayOptions.css";
 import OptionIconBtn from "../../misc/OptionIconBtn/OptionIconBtn";
@@ -8,7 +8,7 @@ import DollarIcon from "../../../img/dollar.svg";
 import TrashIcon from "../../../img/trash-solid.svg";
 import BackIcon from "../../../img/chevron-left-solid.svg";
 
-const OverlayOptions = ({ showOptions, hide }) => {
+const OverlayOptions = ({ showOptions, hide, transaction = {} }) => {
   return (
     <div
       className={`transaction_overlay-options ${
@@ -21,8 +21,20 @@ const OverlayOptions = ({ showOptions, hide }) => {
         hoverColor={"#b11408"}
         customClass={"overlay-option_btn"}
       />
-      <OptionIconBtn icon={CheckIcon} customClass={"overlay-option_btn"} />
-      <OptionIconBtn icon={DollarIcon} customClass={"overlay-option_btn"} />
+      <OptionIconBtn
+        icon={CheckIcon}
+        customClass={"overlay-option_btn"}
+        activeColor={"#1B5E20"}
+        hoverColor={"#09340d"}
+        active={!transaction.pending}
+      />
+      <OptionIconBtn
+        icon={DollarIcon}
+        customClass={"overlay-option_btn"}
+        activeColor={"#1B5E20"}
+        hoverColor={"#09340d"}
+        active={transaction.paid}
+      />
       <OptionIconBtn
         icon={BackIcon}
         customClass={"overlay-option_btn"}

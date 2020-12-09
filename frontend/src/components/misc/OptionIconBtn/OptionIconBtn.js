@@ -5,13 +5,19 @@ import "./option-btn.css";
 const OptionIconBtn = ({
   icon,
   active = true,
-  activeColor = "#3b3b3b",
-  inactiveColor = "",
+  activeColor = "#1e88e5",
+  inactiveColor = "#3b3b3b",
   hoverColor = "",
   customClass,
   onClickFunc,
 }) => {
   const buttonRef = useRef(null);
+  const clickHandler = (e) => {
+    e.stopPropagation();
+    if (onClickFunc) {
+      onClickFunc();
+    }
+  };
   return (
     <div className={`option-button_cont ${customClass}`}>
       <button
@@ -21,7 +27,7 @@ const OptionIconBtn = ({
           backgroundImage: `url('${icon}')`,
           backgroundColor: active ? activeColor : inactiveColor,
         }}
-        onClick={onClickFunc}
+        onClick={clickHandler}
         onMouseEnter={(e) =>
           (buttonRef.current.style.backgroundColor = hoverColor)
         }

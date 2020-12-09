@@ -7,6 +7,7 @@ const Transaction = ({ transaction, background = "#283593" }) => {
   const [state, setState] = useState({
     showOptions: false,
   });
+
   const toggleOptions = () => {
     setState({ ...state, showOptions: !state.showOptions });
   };
@@ -14,9 +15,14 @@ const Transaction = ({ transaction, background = "#283593" }) => {
     <div
       className="transaction"
       style={{ background: background }}
-      onClick={() => toggleOptions()}
+      onClick={toggleOptions}
     >
-      <OverlayOptions hide={toggleOptions} showOptions={state.showOptions} />
+      <OverlayOptions
+        hide={toggleOptions}
+        showOptions={state.showOptions}
+        transaction={transaction}
+      />
+
       <div>
         <h3 className="transaction_name margin0">
           {transaction.name} ({transaction.ammount})
