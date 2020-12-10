@@ -25,7 +25,7 @@ export const addTransaction = (transaction) => (dispatch) => {
 
 export const setPendingStatus = (id, status) => (dispatch) => {
   axios
-    .get("/", { transaction: id, status: status })
+    .get("/#placeholder_setPending", { transaction: id, status: status })
     .then((res) => {
       dispatch({
         type: "SET_PENDING_STATUS",
@@ -42,7 +42,7 @@ export const setPendingStatus = (id, status) => (dispatch) => {
 
 export const setPaidStatus = (id, status) => (dispatch) => {
   axios
-    .get("/", { transaction: id, status: status })
+    .get("/#placeholder_setPaid", { transaction: id, status: status })
     .then((res) => {
       dispatch({
         type: "SET_PAID_STATUS",
