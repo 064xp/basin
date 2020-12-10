@@ -56,3 +56,18 @@ export const setPaidStatus = (id, status) => (dispatch) => {
       // TODO Implement notifications
     });
 };
+
+export const deleteTransaction = (id) => (dispatch) => {
+  axios
+    .delete(`/transactions/${id}`)
+    .then((res) => {
+      dispatch({
+        type: "DELETE_TRANSACTION",
+        payload: { id },
+      });
+    })
+    .catch((e) => {
+      //TODO Display error message
+      alert("error while deleting transaction");
+    });
+};

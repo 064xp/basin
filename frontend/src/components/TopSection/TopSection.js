@@ -8,7 +8,7 @@ const TopSection = (props) => {
   const pending = useSelector((state) => state.transactions.pending).length;
   return (
     <section id="top-section">
-      <h1 className="top-section_busines-name">Business1</h1>
+      <h1 className="top-section_busines-name">My Business</h1>
       <InfoCircle ammount={2000} timeFrame={"week"} pending={pending} />
     </section>
   );

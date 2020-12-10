@@ -59,6 +59,13 @@ const reducer = (state = initialState, action) => {
       };
     default:
       return state;
+
+    case "DELETE_TRANSACTION":
+      return {
+        ...state,
+        pending: state.pending.filter((t) => t.id !== action.payload.id),
+        completed: state.completed.filter((t) => t.id !== action.payload.id),
+      };
   }
 };
 

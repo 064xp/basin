@@ -7,6 +7,7 @@ import OptionIconBtn from "../../misc/OptionIconBtn/OptionIconBtn";
 import {
   setPendingStatus,
   setPaidStatus,
+  deleteTransaction,
 } from "../../../actions/transactionsActions";
 
 import CheckIcon from "../../../img/check-solid.svg";
@@ -30,6 +31,11 @@ const OverlayOptions = ({ showOptions, hide, transaction = {} }) => {
       dispatch(setPaidStatus(transaction.id, state.paid));
     }
     setPrevState(state);
+  };
+
+  const deleter = () => {
+    hide();
+    dispatch(deleteTransaction(transaction.id));
   };
 
   useEffect(() => {
@@ -61,6 +67,7 @@ const OverlayOptions = ({ showOptions, hide, transaction = {} }) => {
         activeColor={"#F44336"}
         hoverColor={"#b11408"}
         customClass={"overlay-option_btn"}
+        onClickFunc={deleter}
       />
       <OptionIconBtn
         icon={CheckIcon}

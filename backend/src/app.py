@@ -86,7 +86,7 @@ def addTransaction():
 def getTransactions():
     db = DataBase(settings.dbFile)
     orderByValues = ('newest', 'oldest')
-    ammount = request.args.get('ammount', default=10, type=int)
+    ammount = request.args.get('ammount', default=50, type=int)
     orderBy = request.args.get('orderBy', default='newest', type=str)
     orderBy = orderBy if orderBy in orderByValues else 'newest'
     offset = request.args.get('offset', default=0, type=int)
