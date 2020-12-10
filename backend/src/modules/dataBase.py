@@ -3,7 +3,7 @@ from sqlite3 import Error
 import uuid
 from werkzeug.security import generate_password_hash
 from modules.definitions.User import User
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 class DataBase:
     def __init__(self, dbFile):
@@ -83,7 +83,6 @@ class DataBase:
         self.conn.commit()
         return id
 
-
     def getTransactions(self, ammount, orderBy, offset, user):
         order = 'date '
         order += 'DESC' if orderBy == 'newest' else 'ASC'
@@ -97,3 +96,45 @@ class DataBase:
         self.cursor.execute(command, (user, ammount, offset))
         transactions = self.cursor.fetchall()
         return transactions
+
+    def getEarnings(self, timeframe, user):
+        monthCommand = '''
+        select sum(cost) as earnings from transactions
+        where strftime('%m',date) = strftime('%m',date('now'))
+        and paid = true and user = ?
+        '''
+        dayCommand = '''
+        select sum(cost) as earnings from transactions
+        where strftime('%d',date) = strftime('%d',date('now'))
+        and paid = true and user = ?
+        '''
+
+        today = date.today()
+        dayWeek = int(today.strftime('%w'))
+        monday = today - timedelta(days=dayWeek-1)
+
+        weekCommand = '''
+        select sum(cost) as earnings from transactions
+        where date >= ? and paid= true and user = ?
+        '''
+
+        if timeframe == 'day':
+            self.cursor.execute(dayCommand, (user,))
+        elif timeframe == 'week':
+            self.cursor.execute(weekCommand, (monday, user,))
+        elif timeframe == 'month':
+            self.cursor.execute(monthCommand, (user,))
+
+        result = self.cursor.fetchall()
+        if not result[0]['earnings']:
+            result = {'earnings': 0}
+        return result
+
+    def deleteTransactions(self, id, userId):
+        deleteCommand = '''
+        delete from transactions
+        where id = ? and user = ?
+
+        '''
+        self.cursor.execute(deleteCommand, (id, userId))
+        self.conn.commit()
