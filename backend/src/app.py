@@ -19,8 +19,8 @@ def root():
 @jwt_required()
 def earnings(timeframe):
     try:
-        db=DataBase(settings.dbFile)
-        total=db.getEarnings(timeframe, str(current_identity))
+        db = DataBase(settings.dbFile)
+        total = db.getEarnings(timeframe, str(current_identity))
         return jsonify(total)
     except:
         return 'Unsuccessful', 500
@@ -29,7 +29,7 @@ def earnings(timeframe):
 @jwt_required()
 def deleter(id):
     try:
-        db=DataBase(settings.dbFile)
+        db = DataBase(settings.dbFile)
         db.deleteTransactions(id, str(current_identity))
         return 'Successful', 200
     except:
