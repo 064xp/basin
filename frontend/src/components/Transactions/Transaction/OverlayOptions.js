@@ -30,7 +30,6 @@ const OverlayOptions = ({ showOptions, hide, transaction = {} }) => {
       dispatch(setPaidStatus(transaction.id, state.paid));
     }
     setPrevState(state);
-    hide();
   };
 
   useEffect(() => {
@@ -38,7 +37,19 @@ const OverlayOptions = ({ showOptions, hide, transaction = {} }) => {
       pending: transaction.pending,
       paid: transaction.paid,
     });
+  }, [transaction]);
+
+  useEffect(() => {
+    if (!showOptions) {
+      commitChanges();
+    }
+    setPrevState({
+      pending: state.pending,
+      paid: state.paid,
+    });
+    // eslint-disable-next-line
   }, [showOptions]);
+
   return (
     <div
       className={`transaction_overlay-options ${
@@ -70,10 +81,16 @@ const OverlayOptions = ({ showOptions, hide, transaction = {} }) => {
       <OptionIconBtn
         icon={BackIcon}
         customClass={"overlay-option_btn"}
-        onClickFunc={commitChanges}
+        onClickFunc={hide}
       />
     </div>
   );
 };
 
 export default OverlayOptions;
+
+OverlayOptions.propTypes = {
+  showOptions: PropTypes.bool,
+  hide: PropTypes.func,
+  transaction: PropTypes.object.isRequired,
+};
