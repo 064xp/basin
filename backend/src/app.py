@@ -35,6 +35,22 @@ def deleter(id):
     except:
         return 'Unsuccessful', 500
 
+@app.route('/transactions/pending', methods = ['POST'])
+@jwt_required()
+def pending():
+    try:
+        json = request.get_json()
+        id = json['id']
+        pending = json['pending']
+        userId = str(current_identity)
+    except:
+        return 'Bad request', 400
+
+    db = DataBase(settings.dbFile)
+    db.updatePendingStatus(id, pending, userId)
+    return 'Succesful', 200
+
+
 @app.route('/sign-up', methods=['POST'])
 def signUp():
     db = DataBase(settings.dbFile)

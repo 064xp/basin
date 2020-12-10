@@ -138,3 +138,11 @@ class DataBase:
         '''
         self.cursor.execute(deleteCommand, (id, userId))
         self.conn.commit()
+
+    def updatePendingStatus(self, id, pending, userId):
+        CommandPending = '''
+        update transactions set pending = ?
+        where id = ? and user = ?
+        '''
+        self.cursor.execute(CommandPending, (pending, id, userId))
+        self.conn.commit()
