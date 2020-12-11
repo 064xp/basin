@@ -146,3 +146,11 @@ class DataBase:
         '''
         self.cursor.execute(CommandPending, (pending, id, userId))
         self.conn.commit()
+
+    def updatePaidStatus(self, id, paid, userId):
+        CommandPaid = '''
+        update transactions set paid = ?
+        where id = ? and user = ?
+        '''
+        self.cursor.execute(CommandPaid, (paid, id, userId))
+        self.conn.commit()
