@@ -125,9 +125,10 @@ class DataBase:
         elif timeframe == 'month':
             self.cursor.execute(monthCommand, (user,))
 
-        result = self.cursor.fetchall()
-        if not result[0]['earnings']:
+        result = self.cursor.fetchall()[0]
+        if not result['earnings']:
             result = {'earnings': 0}
+
         return result
 
     def deleteTransactions(self, id, userId):

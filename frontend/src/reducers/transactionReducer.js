@@ -1,6 +1,7 @@
 const initialState = {
   pending: [],
   completed: [],
+  earnings: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -63,8 +64,14 @@ const reducer = (state = initialState, action) => {
     case "DELETE_TRANSACTION":
       return {
         ...state,
-        pending: state.pending.filter((t) => t.id !== action.payload.id),
-        completed: state.completed.filter((t) => t.id !== action.payload.id),
+        pending: state.pending.filter((t) => t.id !== action.payload),
+        completed: state.completed.filter((t) => t.id !== action.payload),
+      };
+
+    case "SET_EARNINGS":
+      return {
+        ...state,
+        earnings: action.payload,
       };
   }
 };

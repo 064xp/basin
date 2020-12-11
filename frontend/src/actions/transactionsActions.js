@@ -63,11 +63,22 @@ export const deleteTransaction = (id) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: "DELETE_TRANSACTION",
-        payload: { id },
+        payload: id,
       });
     })
     .catch((e) => {
       //TODO Display error message
       alert("error while deleting transaction");
+    });
+};
+
+export const getEarnings = (timeframe) => (dispatch) => {
+  axios
+    .get(`/earnings/${timeframe}`)
+    .then((res) => {
+      dispatch({ type: "SET_EARNINGS", payload: res.data.earnings });
+    })
+    .catch((e) => {
+      //TODO dispay error
     });
 };

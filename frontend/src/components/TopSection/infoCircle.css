@@ -6,7 +6,12 @@
   border-radius: 999px;
   background-color: #1e88e5;
   color: white;
-  padding: 1.4em;
+  padding: 0.7em;
+  height: 30vh;
+  width: 30vh;
+  min-height: 169px;
+  min-width: 169px;
+  box-sizing: border-box;
 }
 
 .info-circle_time-frame {
