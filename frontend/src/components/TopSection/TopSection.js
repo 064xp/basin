@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import InfoCircle from "./InfoCircle";
+import InfoCircle from "./InfoCircle/InfoCircle";
 import PropTypes from "prop-types";
 import "./topSection.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,10 +17,20 @@ const TopSection = (props) => {
       dispatch(getEarnings(timeFrame));
     }
   }, [loggedIn]);
+
+  useEffect(() => {
+    dispatch(getEarnings(timeFrame));
+  }, [timeFrame]);
   return (
     <section id="top-section">
       <h1 className="top-section_busines-name">My Business</h1>
-      <InfoCircle ammount={earnings} timeFrame={"week"} pending={pending} />
+      <InfoCircle
+        ammount={earnings}
+        timeFrame={"week"}
+        pending={pending}
+        timeFrame={timeFrame}
+        setTimeFrame={setTimeFrame}
+      />
     </section>
   );
 };

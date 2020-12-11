@@ -1,0 +1,85 @@
+.info-circle-container {
+  position: relative;
+  transition: all 250ms ease-in;
+}
+
+.info-circle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 999px;
+  background-color: #1e88e5;
+  color: white;
+  padding: 0.7em;
+  height: 15vw;
+  width: 15vw;
+  min-height: 210px;
+  min-width: 210px;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+  z-index: 7;
+}
+
+.info-circle_ammount {
+  font-size: max(60px, 5vw);
+  font-weight: normal;
+  margin: 0;
+}
+
+.info-circle_time-frame {
+  font-weight: lighter;
+  font-size: max(1.5vw, 1.4em);
+  margin: 0.5em 0 0 0;
+}
+
+.info-circle_pending {
+  font-weight: lighter;
+  font-size: 1.4em;
+  margin: 0 0 0.5em 0;
+  font-size: max(1.5vw, 1.4em);
+}
+
+.info-circle_choose-timeframe {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 9px;
+  width: 100%;
+  overflow: hidden;
+  margin: 2vh 0 0 0;
+  max-height: 0;
+  z-index: 3;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.24);
+  transition: max-height 250ms ease-in;
+}
+
+.info-circle-choose-timeFrame_show {
+  border: 1px solid #d2d2d2;
+  max-height: 1000px;
+}
+
+.info-circle_timeframe-option {
+  background: white;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  border-top: 1px solid #d2d2d2;
+}
+
+.info-circle_timeframe-option:first-child {
+  border: none;
+}
+
+.info-circle_timeframe-option_active {
+  background: #2962ff;
+  color: white;
+}
+
+.info-circle_timeframe-option:hover {
+  background: #2962ff;
+  color: white;
+}
