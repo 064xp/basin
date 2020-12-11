@@ -64,7 +64,12 @@ const InputForm = (props) => {
         onClick={toggleForm}
         style={{ backgroundImage: `url(${plus})` }}
       ></button>
-      <form action="#" ref={formEl} className={"transaction-inputForm"}>
+      <form
+        action="#"
+        ref={formEl}
+        className={"transaction-inputForm"}
+        onSubmit={onSubmit}
+      >
         <h1>Add a new Transaction</h1>
         <Transaction transaction={state} />
         <button
@@ -115,11 +120,7 @@ const InputForm = (props) => {
           />
         </div>
 
-        <button
-          className="transaction-inputForm-submit"
-          type="submit"
-          onClick={onSubmit}
-        >
+        <button className="transaction-inputForm-submit" type="submit">
           Submit
         </button>
       </form>

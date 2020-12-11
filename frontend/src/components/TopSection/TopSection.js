@@ -8,6 +8,7 @@ import { getEarnings } from "../../actions/transactionsActions";
 const TopSection = (props) => {
   const dispatch = useDispatch();
   const pending = useSelector((state) => state.transactions.pending).length;
+  const completed = useSelector((state) => state.transactions.completed).length;
   const earnings = useSelector((state) => state.transactions.earnings);
   const loggedIn = useSelector((state) => state.user.loggedIn);
   const [timeFrame, setTimeFrame] = useState("week");
@@ -16,11 +17,8 @@ const TopSection = (props) => {
     if (loggedIn) {
       dispatch(getEarnings(timeFrame));
     }
-  }, [loggedIn]);
+  }, [loggedIn, timeFrame, completed]);
 
-  useEffect(() => {
-    dispatch(getEarnings(timeFrame));
-  }, [timeFrame]);
   return (
     <section id="top-section">
       <h1 className="top-section_busines-name">My Business</h1>

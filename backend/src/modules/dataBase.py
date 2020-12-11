@@ -105,7 +105,7 @@ class DataBase:
         '''
         dayCommand = '''
         select sum(cost) as earnings from transactions
-        where strftime('%d',date) = strftime('%d',date('now'))
+        where strftime('%d%m%Y', transactions.date) = strftime('%d%m%Y', date('now', 'localtime'))
         and paid = true and user = ?
         '''
 
