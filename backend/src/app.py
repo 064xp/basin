@@ -35,6 +35,42 @@ def deleter(id):
     except:
         return 'Unsuccessful', 500
 
+@app.route('/transactions/pending', methods = ['POST'])
+@jwt_required()
+def pending():
+    try:
+        json = request.get_json()
+        id = json['id']
+        pending = json['pending']
+        userId = str(current_identity)
+    except:
+        return 'Bad request', 400
+
+    try:
+        db = DataBase(settings.dbFile)
+        db.updatePendingStatus(id, pending, userId)
+        return 'Succesful', 200
+    except:
+        return 'Unsuccessful', 500
+
+@app.route('/transactions/paid', methods = ['POST'])
+@jwt_required()
+def paid():
+    try:
+        json = request.get_json()
+        id = json['id']
+        paid = json['paid']
+        userId = str(current_identity)
+    except:
+        return 'Bad request', 400
+
+    try:
+        db = DataBase(settings.dbFile)
+        db.updatePaidStatus(id, paid, userId)
+        return 'Succesful', 200
+    except:
+        return 'Unsuccessful', 500
+
 @app.route('/sign-up', methods=['POST'])
 def signUp():
     db = DataBase(settings.dbFile)
@@ -43,10 +79,10 @@ def signUp():
         username = json['username']
         password = json['password']
     except:
-        return jsonify({'satus': 'error', 'error': 'Invalid JSON'}), 400
+        return jsonify({'status': 'error', 'error': 'Invalid JSON'}), 400
 
     if not username or not password:
-        return jsonify({'satus': 'error', 'error': 'Username or password cannot be empty'}), 400
+        return jsonify({'status': 'error', 'error': 'Username or password cannot be empty'}), 400
 
     try:
         db.insertUser(username, password)
