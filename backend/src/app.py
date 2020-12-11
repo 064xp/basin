@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import os
 from datetime import timedelta, datetime
 from sqlite3 import Error
@@ -8,12 +8,17 @@ from modules.dataBase import DataBase
 from modules.helperFunctions import HelperFunctions as hf
 import settings
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static/build')
 jwt = JWT(app, JWTFunctions.authenticate, JWTFunctions.identity)
 
-@app.route('/')
-def root():
-    return 'you made it!'
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
 
 @app.route('/earnings/<timeframe>')
 @jwt_required()
@@ -105,7 +110,6 @@ def addTransaction():
         ammount = json['ammount']
         cost = json['cost']
         individualPrice = json['individualPrice']
-        print(json)
     except:
         return jsonify({'status': 'error', 'error': request}), 400
 
@@ -130,11 +134,6 @@ def getTransactions():
 
     transactions = db.getTransactions(ammount, orderBy, offset, str(current_identity))
     return jsonify({'transactions': transactions}), 200
-
-
-@app.errorhandler(404)
-def notFound(e):
-    return app.send_static_file('../public/index.html')
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(15)

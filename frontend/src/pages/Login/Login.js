@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../actions/userActions";
 import AuthForm from "../../components/AuthForm/AuthForm";

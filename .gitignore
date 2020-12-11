@@ -2,3 +2,4 @@ scraps/
 *.db
 __pycache__/
 public/
+static/
